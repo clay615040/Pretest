@@ -2,6 +2,7 @@
   "name": "pretest",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://clay615040.github.io/pretest",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
