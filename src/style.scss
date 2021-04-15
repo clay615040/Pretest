@@ -12,11 +12,6 @@ body {
   height: 100%;
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.103);
-
-  &.active {
-    overflow: hidden;
-    max-height: calc(100vh - 20px);
-  }
 }
 
 .search {
@@ -52,6 +47,7 @@ body {
 input {
   border: 0;
   outline: none;
+
   &:focus {
     border: 0;
   }
@@ -75,11 +71,13 @@ input {
   background-image: url('./images/pngwing.com.png');
   background-size: contain;
   background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .adv {
   position: relative;
   display: flex;
+  justify-content: center;
   margin-top: 20px;
   padding: 20px;
   width: 1240px;
@@ -103,6 +101,7 @@ input {
   border-radius: 100%;
   color: white;
   font-size: 24px;
+  cursor: pointer;
 }
 
 .adv_btn_right {
@@ -118,17 +117,32 @@ input {
   border-radius: 100%;
   color: white;
   font-size: 24px;
+  cursor: pointer;
 }
 
 .adv_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   bottom: 18px;
-  left: calc(50% - 13px);
-  width: 26px;
   height: 26px;
   background-color: black;
   color: white;
   font-size: 24px;
+  cursor: pointer;
+}
+
+.adv_btn_ball {
+  margin: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: white;
+
+  &.active {
+    background-color: red;
+  }
 }
 
 .time {
@@ -166,6 +180,7 @@ input {
   text-align: center;
   background-color: white;
   border-radius: 4px;
+  cursor: pointer;
 
   &:last-child {
     margin: 0;
@@ -197,6 +212,7 @@ input {
   height: 140px;
   background-color: white;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .commodity_item_img {
@@ -259,6 +275,7 @@ input {
   background-color: black;
   color: white;
   border-radius: 16px;
+  cursor: pointer;
 
   &.active {
     display: block;

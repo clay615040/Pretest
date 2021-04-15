@@ -1,13 +1,14 @@
 <template lang="pug">
-.background(:class="{active : mask}")
+.background
   .search
     .search_icon
     input.search_input(v-model.trim="searchText")
     .search_close
       .close_icon(@click="searchText = ''")
-  .adv(v-if="advImgName" :style="{backgroundImage:`url('${require(`./images/adv/${advImgName.name}`)}')`}")
+  .adv(v-if="advImgName" :style="{backgroundImage:`url('${require(`./images/adv/${advImgName}`)}')`}")
     .adv_btn_left(@click="advImgLeft()") {{'<'}}
-    //- .adv_btn
+    .adv_btn
+      .adv_btn_ball(v-for="item in advImg" :key="item.id" :class="{ active: item.id === advImgTag }" @click="changeAdvImg(item)")
     .adv_btn_right(@click="advImgRight()") {{'>'}}
   .time {{'倒數 ' + hours + ':' + minutes + ':' + seconds}}
   .commodity
@@ -39,16 +40,16 @@ export default {
         { id: 5, typeName: '電系' }, 
       ],
       advImg: [
-        { id: 0, name: '000.jpg' }, 
-        { id: 1, name: '001.jpg' }, 
-        { id: 2, name: '002.jpg' }, 
-        { id: 3, name: '003.jpg' },
-        { id: 4, name: '004.jpg' },
-        { id: 5, name: '005.jpg' }, 
-        { id: 6, name: '006.jpg' }, 
-        { id: 7, name: '007.jpg' }, 
-        { id: 8, name: '008.jpg' }, 
-        { id: 9, name: '009.jpg' }, 
+        { id: 0, imgName: '000.jpg' }, 
+        { id: 1, imgName: '001.jpg' }, 
+        { id: 2, imgName: '002.jpg' }, 
+        { id: 3, imgName: '003.jpg' },
+        { id: 4, imgName: '004.jpg' },
+        { id: 5, imgName: '005.jpg' }, 
+        { id: 6, imgName: '006.jpg' }, 
+        { id: 7, imgName: '007.jpg' }, 
+        { id: 8, imgName: '008.jpg' }, 
+        { id: 9, imgName: '009.jpg' }, 
       ],
       commodity_item: [
         { type: [ 0, 3 ], pokemonName: '妙蛙種子', imgName: 'pm001.gif' },
@@ -75,7 +76,7 @@ export default {
         { type: [ 0, 2 ], pokemonName: '火精靈', imgName: 'pm136.gif' },
 
       ],
-      advImgName: '',
+      advImgName: '000.jpg',
       advImgTag: 0,
       mask: false,
       pop_img: '',
@@ -102,7 +103,6 @@ export default {
   },
 
   mounted () {
-    this.advImgName = this.advImg[this.advImgTag]
     let vm = this
     window.addEventListener('scroll', function () {
       if (window.scrollY === 0) vm.activeGoTop = false
@@ -115,18 +115,19 @@ export default {
     advImgLeft() {
       if(this.advImgTag === 0) return ''
       else this.advImgTag = this.advImgTag - 1
-      this.advImgName = this.advImg[this.advImgTag]
+      this.advImgName = this.advImg[this.advImgTag].imgName
       return ''
     },
     advImgRight() {
       if(this.advImgTag === this.advImg.length - 1) return ''
       else this.advImgTag = this.advImgTag + 1 
-      this.advImgName = this.advImg[this.advImgTag]
+      this.advImgName = this.advImg[this.advImgTag].imgName
       return ''
     },
     pop(item) {
       this.pop_img = item.imgName
       this.pop_name = item.pokemonName
+      document.body.style.overflow = 'hidden'
       this.mask = true
     },
     goTopHandler () {
@@ -140,6 +141,10 @@ export default {
         this.timeTotal = this.timeTotal - 1000;
         setTimeout(this.reciprocal, 1000);
       }
+    },
+    changeAdvImg(item) {
+      this.advImgName = item.imgName
+      this.advImgTag = item.id
     },
   }
 }
