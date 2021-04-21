@@ -102,6 +102,12 @@ export default {
     },
   },
 
+  watch: {
+    'mask' () {
+      this.mask === true ? document.body.style.overflow = 'hidden' : document.body.style.overflow = ''
+    },
+  },
+
   mounted () {
     let vm = this
     window.addEventListener('scroll', function () {
