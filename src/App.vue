@@ -94,7 +94,9 @@ export default {
     searchPokemon () {
       if(this.searchText.length) {
         return this.commodity_item.filter(item => {
-        return item.pokemonName == this.searchText
+          let content = item.pokemonName.toLowerCase()
+          let keyword = this.searchText.toLowerCase()
+          return content.indexOf(keyword) != -1
       })
       } else {
         return this.commodity_item
